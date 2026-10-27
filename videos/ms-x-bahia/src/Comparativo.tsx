@@ -564,6 +564,8 @@ export const Comparativo: React.FC = () => {
       />
       <Placar />
       <Audio src={staticFile("audio/narracao.mp3")} />
+      {/* Trilha original (scripts/gerar-trilha.py), ~14 dB abaixo da voz */}
+      <Audio src={staticFile("audio/trilha.mp3")} volume={0.09} />
 
       <Sequence name="Abertura" durationInFrames={T.intro}>
         <CenaIntro />

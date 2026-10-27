@@ -9,6 +9,8 @@ Vídeo vertical (1080×1920, 30 fps, 78,5 s, com narração) comparando Mato Gro
 
 Narração: ElevenLabs (voz "Livia – Warm, Expressive and Calm", eleven_v4), em `public/audio/narracao.mp3`. O texto está em [`ROTEIRO-NARRACAO.md`](ROTEIRO-NARRACAO.md). As cenas cortam no meio da pausa entre os blocos da fala (tempos em `src/theme.ts`).
 
+Trilha sonora: composição original gerada por síntese em `scripts/gerar-trilha.py` (sem licença de terceiros), em `public/audio/trilha.mp3`, cerca de 14 dB abaixo da voz. Ela segue os cortes do vídeo: pulso e bateria nos indicadores, um sino a cada ponto do placar, só a harmonia em "quem governa", tensão na tendência e resolução em dó maior no final. Se mudar os tempos em `src/theme.ts`, atualize as constantes no script e rode `python3 scripts/gerar-trilha.py trilha.wav`. Depois converta com `ffmpeg -i trilha.wav -af loudnorm=I=-16:TP=-1.5 -b:a 192k public/audio/trilha.mp3`.
+
 | Tempo | Cena | MS | Bahia | Fonte na tela |
 |---|---|---|---|---|
 | 0–4,9 s | Abertura: mapas dos dois estados | | | |
