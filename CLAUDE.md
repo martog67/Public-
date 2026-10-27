@@ -11,3 +11,13 @@
 
 ## Vídeos
 - Projetos de vídeo em Remotion ficam em `videos/<nome-do-video>/`. Use as skills `remotion-*` em `.claude/skills/`.
+
+### Área segura do Instagram (regra obrigatória para vídeos verticais)
+A interface do Instagram (perfil, áudio, menu, legenda do post e botões) cobre partes do vídeo. Em vídeos 1080×1920:
+- **Área morta no topo: 250 px.** Nome do perfil, "Áudio original" e menu.
+- **Área morta embaixo: 420 px.** Foto e nome do perfil, legenda do post e barra.
+- **Área morta à direita: 150 px.** Curtir, comentar, repostar, enviar e salvar.
+- **Margem à esquerda: 60 px.**
+- **Todo conteúdo (logo, textos, números, fontes, legendas, placar e mapas) fica dentro da área segura: x de 60 a 930 e y de 250 a 1500 (870×1250).** Fora dela, só o fundo, que pode ocupar a tela inteira.
+- Em outros tamanhos, mantenha as mesmas proporções.
+- Antes de entregar, sobreponha `marca/instagram-area-segura-1080x1920.png` a frames de cada cena e confira que nada importante cai na área vermelha.
