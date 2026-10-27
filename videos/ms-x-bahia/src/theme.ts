@@ -26,16 +26,26 @@ export const COR = {
 
 export const FPS = 30;
 
-// Linha do tempo (em frames)
+// Linha do tempo (em frames), sincronizada com public/audio/narracao.mp3 (76,8 s).
+// Cada corte fica no meio da pausa entre dois blocos da narração.
 export const T = {
-  intro: 120,
-  indicador: 240,
-  governo: 210,
-  tendencia: 240,
-  final: 165,
+  intro: 146,
+  // desemprego, renda, mortes violentas, analfabetismo
+  indicadores: [334, 303, 409, 275],
+  governo: 334,
+  tendencia: 310,
+  final: 244,
 };
 
-export const INICIO_GOVERNO = T.intro + 4 * T.indicador;
+// Frame (dentro de cada indicador) em que o ponto vai para o placar,
+// logo depois de a narração citar o segundo estado.
+export const PONTOS = [225, 205, 265, 240];
+
+export const INICIO_INDICADOR = T.indicadores.map(
+  (_, i) => T.intro + T.indicadores.slice(0, i).reduce((a, b) => a + b, 0),
+);
+export const INICIO_GOVERNO =
+  T.intro + T.indicadores.reduce((a, b) => a + b, 0);
 export const INICIO_TENDENCIA = INICIO_GOVERNO + T.governo;
 export const INICIO_FINAL = INICIO_TENDENCIA + T.tendencia;
 export const DURACAO_TOTAL = INICIO_FINAL + T.final;

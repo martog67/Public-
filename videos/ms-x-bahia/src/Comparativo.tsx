@@ -1,4 +1,5 @@
 import React from "react";
+import { Audio } from "@remotion/media";
 import {
   AbsoluteFill,
   Img,
@@ -16,7 +17,9 @@ import {
   FONT,
   INICIO_FINAL,
   INICIO_GOVERNO,
+  INICIO_INDICADOR,
   INICIO_TENDENCIA,
+  PONTOS,
   T,
 } from "./theme";
 
@@ -26,9 +29,6 @@ const PLACAR = { top: 770, height: 120 };
 const PAINEL_BA = { top: 910, height: 560 };
 const LEGENDA_TOP = 1500;
 const LADO = 80;
-
-// Momento (dentro de cada indicador) em que o ponto vai para o placar
-const PONTO_EM = 150;
 
 const useEntrada = (atraso = 0) => {
   const frame = useCurrentFrame();
@@ -161,7 +161,8 @@ const NumeroEstado: React.FC<{
   cor: string;
   pos: { top: number; height: number };
   vence: boolean;
-}> = ({ valor, cor, pos, vence }) => {
+  pontoEm: number;
+}> = ({ valor, cor, pos, vence, pontoEm }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const entrada = spring({ frame: frame - 10, fps, config: { damping: 200 } });
@@ -170,7 +171,7 @@ const NumeroEstado: React.FC<{
     extrapolateRight: "clamp",
   });
   const selo = spring({
-    frame: frame - PONTO_EM,
+    frame: frame - pontoEm,
     fps,
     config: { damping: 12 },
   });
@@ -279,14 +280,24 @@ const Fonte: React.FC<{ texto: string }> = ({ texto }) => {
   );
 };
 
-const CenaIndicador: React.FC<{ indicador: Indicador }> = ({ indicador }) => (
+const CenaIndicador: React.FC<{ indicador: Indicador; pontoEm: number }> = ({
+  indicador,
+  pontoEm,
+}) => (
   <AbsoluteFill>
-    <NumeroEstado valor={indicador.ms} cor={COR.ms} pos={PAINEL_MS} vence />
+    <NumeroEstado
+      valor={indicador.ms}
+      cor={COR.ms}
+      pos={PAINEL_MS}
+      vence
+      pontoEm={pontoEm}
+    />
     <NumeroEstado
       valor={indicador.ba}
       cor={COR.ba}
       pos={PAINEL_BA}
       vence={false}
+      pontoEm={pontoEm}
     />
     <Legenda texto={indicador.legenda} atraso={40} />
     <Fonte texto={indicador.fonte} />
@@ -298,12 +309,14 @@ const Placar: React.FC = () => {
   const { fps } = useVideoConfig();
   const entrada = spring({ frame: frame - 15, fps, config: { damping: 200 } });
 
-  const indice = Math.floor((frame - T.intro) / T.indicador);
+  const indice =
+    INICIO_INDICADOR.filter((inicio) => frame >= inicio).length - 1;
   const pontos = INDICADORES.filter(
-    (_, i) => frame >= T.intro + i * T.indicador + PONTO_EM,
+    (_, i) => frame >= INICIO_INDICADOR[i] + PONTOS[i],
   ).length;
   // "pulo" do placar quando entra um ponto
-  const ultimoPonto = T.intro + (pontos - 1) * T.indicador + PONTO_EM;
+  const ultimoPonto =
+    pontos > 0 ? INICIO_INDICADOR[pontos - 1] + PONTOS[pontos - 1] : 0;
   const pulo =
     pontos > 0
       ? spring({ frame: frame - ultimoPonto, fps, config: { damping: 10 } })
@@ -550,6 +563,7 @@ export const Comparativo: React.FC = () => {
         atraso={8}
       />
       <Placar />
+      <Audio src={staticFile("audio/narracao.mp3")} />
 
       <Sequence name="Abertura" durationInFrames={T.intro}>
         <CenaIntro />
@@ -558,10 +572,10 @@ export const Comparativo: React.FC = () => {
         <Sequence
           key={ind.id}
           name={ind.rotulo}
-          from={T.intro + i * T.indicador}
-          durationInFrames={T.indicador}
+          from={INICIO_INDICADOR[i]}
+          durationInFrames={T.indicadores[i]}
         >
-          <CenaIndicador indicador={ind} />
+          <CenaIndicador indicador={ind} pontoEm={PONTOS[i]} />
         </Sequence>
       ))}
       <Sequence

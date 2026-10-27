@@ -1,22 +1,24 @@
 # MS × Bahia — vídeo comparativo (O Sul-Mato-Grossense)
 
-Vídeo vertical (1080×1920, 30 fps, 56,5 s, sem áudio) comparando Mato Grosso do Sul e Bahia nos mesmos indicadores de um vídeo viral que compara Santa Catarina e Bahia.
+Vídeo vertical (1080×1920, 30 fps, 78,5 s, com narração) comparando Mato Grosso do Sul e Bahia nos mesmos indicadores de um vídeo viral que compara Santa Catarina e Bahia.
 
 - **Vídeo pronto:** [`entrega/ms-x-bahia.mp4`](entrega/ms-x-bahia.mp4)
 - **Análise do vídeo de referência:** [`ANALISE-VIDEO-ORIGINAL.md`](ANALISE-VIDEO-ORIGINAL.md)
 
 ## Roteiro
 
+Narração: ElevenLabs (voz "Livia – Warm, Expressive and Calm", eleven_v4), em `public/audio/narracao.mp3`. O texto está em [`ROTEIRO-NARRACAO.md`](ROTEIRO-NARRACAO.md). As cenas cortam no meio da pausa entre os blocos da fala (tempos em `src/theme.ts`).
+
 | Tempo | Cena | MS | Bahia | Fonte na tela |
 |---|---|---|---|---|
-| 0–4 s | Abertura: mapas dos dois estados | | | |
-| 4–12 s | Desemprego | 2,7% (entre as 5 menores) | 9,1% (2ª maior) | IBGE/PNAD Contínua, 2º tri 2026 |
-| 12–20 s | Renda por pessoa (mês) | R$ 2.454 | R$ 1.465 (6ª menor) | IBGE, rendimento domiciliar per capita 2025 |
-| 20–28 s | Mortes violentas / 100 mil | 20,2 (mortes +4,9% em 2025) | 36,8 (2ª maior) | Anuário Brasileiro de Segurança Pública 2026 |
-| 28–36 s | Analfabetismo (15+) | 3,9% (era 3,7%) | 9,5% (1,1 milhão) | IBGE/PNAD Contínua Educação 2025 |
-| 36–43 s | Quem governa | Eduardo Riedel (PP), desde 2023, reeleito em 2026 | PT desde 2007 | TSE |
-| 43–51 s | Tendência em 2025 | Piorou em violência e analfabetismo | Melhorou nos dois | FBSP 2026; IBGE 2025 |
-| 51–56,5 s | Placar final MS 4 × 0 BA + "Em qual estado você preferiria viver?" + logo OSM | | | |
+| 0–4,9 s | Abertura: mapas dos dois estados | | | |
+| 4,9–16 s | Desemprego | 2,7% (entre as 5 menores) | 9,1% (2ª maior) | IBGE/PNAD Contínua, 2º tri 2026 |
+| 16–26,1 s | Renda por pessoa (mês) | R$ 2.454 | R$ 1.465 (6ª menor) | IBGE, rendimento domiciliar per capita 2025 |
+| 26,1–39,7 s | Mortes violentas / 100 mil | 20,2 (mortes +4,9% em 2025) | 36,8 (2ª maior) | Anuário Brasileiro de Segurança Pública 2026 |
+| 39,7–48,9 s | Analfabetismo (15+) | 3,9% (era 3,7%) | 9,5% (1,1 milhão) | IBGE/PNAD Contínua Educação 2025 |
+| 48,9–60 s | Quem governa | Eduardo Riedel (PP), desde 2023, reeleito em 2026 | PT desde 2007 | TSE |
+| 60–70,4 s | Tendência em 2025 | Piorou em violência e analfabetismo | Melhorou nos dois | FBSP 2026; IBGE 2025 |
+| 70,4–78,5 s | Placar final MS 4 × 0 BA + "Em qual estado você preferiria viver?" + logo OSM | | | |
 
 Referências nacionais citadas: desemprego Brasil 5,4%; renda Brasil R$ 2.316; mortes violentas Brasil 19,1/100 mil; analfabetismo Brasil 4,9%.
 
