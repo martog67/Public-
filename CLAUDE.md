@@ -5,6 +5,15 @@
 - Os logos são brancos com fundo transparente: use sobre fundo escuro.
 - Não invente cores, fontes ou slogans da marca que não estejam em `marca/osm/`.
 
+- O jornal também publica o perfil **O Campo-Grandense**. O logo dele fica em `marca/campo-grandense/logos/`.
+
+## Série OSM Explica
+- Vídeos explicativos (dados, apuração) fazem parte da série **OSM Explica**: a etiqueta "OSM EXPLICA" vai no topo.
+- Todo vídeo da série termina com um CTA: "Siga nossos perfis", com os logos do OSM (@osulmatogrossense) e do O Campo-Grandense.
+- A narração do CTA é gravada separada e entra depois da narração principal.
+- Não repita na tela o texto que já está na legenda: legenda e grafismo devem se completar, não se duplicar.
+- Fonte dos vídeos: Bricolage Grotesque (SIL OFL). É uma escolha de design, não uma fonte oficial da marca.
+
 ## Conteúdo jornalístico
 - Todo número em um material precisa de fonte e período visíveis na tela (ex.: "IBGE/PNAD Contínua, 2º tri 2026").
 - Registre as fontes completas (com links) no README do projeto do material.

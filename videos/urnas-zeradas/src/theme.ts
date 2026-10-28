@@ -1,12 +1,19 @@
 import { loadFont } from "@remotion/fonts";
 import { staticFile } from "remotion";
 
-export const FONT = "Inter";
+export const FONT = "Bricolage Grotesque";
 
-for (const weight of ["500", "700", "800", "900"]) {
+// Bricolage Grotesque (SIL OFL) vai até 800; o peso 900 usa o mesmo arquivo do 800.
+for (const [weight, arquivo] of [
+  ["500", "500"],
+  ["600", "600"],
+  ["700", "700"],
+  ["800", "800"],
+  ["900", "800"],
+]) {
   loadFont({
     family: FONT,
-    url: staticFile(`fonts/inter-latin-${weight}-normal.woff2`),
+    url: staticFile(`fonts/bricolage-grotesque-latin-${arquivo}-normal.woff2`),
     weight,
   });
 }

@@ -1,4 +1,4 @@
-import { LEGENDAS, FIM_AUDIO } from "./legendas";
+import { CTA, LEGENDAS } from "./legendas";
 
 const FPS = 30;
 
@@ -23,11 +23,12 @@ const ABERTURAS = [
   ["pl", "pl"],
   ["lulaZero", "lula0"],
   ["final", "final"],
+  ["cta", "cta"],
 ] as const;
 
 export type IdCena = (typeof ABERTURAS)[number][0];
 
-export const DURACAO_TOTAL = Math.round((FIM_AUDIO + 1.5) * FPS);
+export const DURACAO_TOTAL = Math.round((CTA.inicio + CTA.duracao + 1) * FPS);
 
 export const CENAS = ABERTURAS.map(([id, marca], i) => {
   const inicio = Math.max(0, Math.round((segundos(marca) - ANTES) * FPS));

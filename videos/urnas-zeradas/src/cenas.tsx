@@ -20,8 +20,8 @@ import {
   Rotulo,
   lonLat,
 } from "./cartoes";
-import { Cartao, FLAVIO, INTERNO, LULA, P, aparece } from "./layout";
-import { local } from "./theme";
+import { Cartao, FLAVIO, G, INTERNO, LULA, P, aparece } from "./layout";
+import { LARGURA_UTIL, X0, local } from "./theme";
 
 // Urnas com zero voto para Flávio, por estado (2º turno)
 const URNAS: readonly [string, string, number][] = [
@@ -550,65 +550,133 @@ export const LulaZero: React.FC = () => {
   );
 };
 
-export const Final: React.FC = () => {
+export const Final: React.FC = () => (
+  <Cartao
+    fonte="TSE, boletins de urna do 2º turno · 497.897 urnas no Brasil"
+    escuro
+  >
+    <NumeroGrande
+      top={40}
+      valor={0.02}
+      casas={2}
+      sufixo="%"
+      atraso={10}
+      tamanho={220}
+      cor={P.branco}
+    />
+    <Rotulo
+      top={290}
+      texto="das urnas do país tiveram zero voto para Flávio"
+      tamanho={36}
+      cor={P.branco}
+      atraso={20}
+    />
+    <Proporcao top={420} parte={106} total={497897} atraso={30} />
+    <Pilula
+      top={580}
+      texto="Dados: boletins de urna do TSE"
+      atraso={60}
+      fundo={P.branco}
+      cor={P.azul}
+    />
+  </Cartao>
+);
+
+// Encerramento da série OSM Explica: chamada para seguir os perfis
+export const Cta: React.FC = () => {
   const frame = useCurrentFrame();
-  const osm = local("osm", "final");
+  const siga = aparece(frame, 5, 15);
+  const logos = [
+    {
+      src: "marca/osm-nome-completo-recorte.png",
+      largura: 680,
+      sub: "@osulmatogrossense",
+      atraso: local("cta-siga", "cta") + 10,
+    },
+    {
+      src: "marca/campo-grandense-recorte.png",
+      largura: 540,
+      sub: "",
+      atraso: local("cta-siga", "cta") + 30,
+    },
+  ];
   return (
-    <Cartao
-      fonte="TSE, boletins de urna do 2º turno · 497.897 urnas no Brasil"
-      escuro
+    <div
+      style={{
+        position: "absolute",
+        top: G.capitulo,
+        left: X0,
+        width: LARGURA_UTIL,
+        // a legenda some no CTA, então a cena ocupa até o fim da área segura
+        height: G.legenda.top + G.legenda.altura - G.capitulo,
+        justifyContent: "center",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
     >
-      <NumeroGrande
-        top={10}
-        valor={0.02}
-        casas={2}
-        sufixo="%"
-        atraso={10}
-        tamanho={190}
-        cor={P.branco}
-      />
-      <Rotulo
-        top={225}
-        texto="das urnas do país tiveram zero voto para Flávio"
-        tamanho={34}
-        cor={P.branco}
-        atraso={20}
-      />
-      <Proporcao top={310} parte={106} total={497897} atraso={30} />
-      <Pilula
-        top={430}
-        texto="Dados: boletins de urna do TSE"
-        atraso={60}
-        fundo={P.branco}
-        cor={P.azul}
-      />
       <div
         style={{
-          position: "absolute",
-          top: 520,
-          left: 0,
-          width: INTERNO,
+          fontSize: 76,
+          fontWeight: 800,
+          lineHeight: 1.05,
+          textAlign: "center",
+          opacity: siga,
+          transform: `translateY(${(1 - siga) * 20}px)`,
+        }}
+      >
+        Siga nossos perfis
+      </div>
+      <div
+        style={{
+          fontSize: 34,
+          fontWeight: 600,
+          color: P.textoSuave,
+          marginTop: 14,
+          opacity: siga,
+        }}
+      >
+        para mais conteúdos como este
+      </div>
+      <div
+        style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          opacity: aparece(frame, osm, 15),
+          gap: 70,
+          marginTop: 90,
         }}
       >
-        <Img
-          src={staticFile("marca/osm-nome-completo-branco.png")}
-          style={{ width: 440 }}
-        />
-        <div
-          style={{
-            fontSize: 30,
-            fontWeight: 800,
-            marginTop: -14,
-            color: P.amarelo,
-          }}
-        >
-          mostra os números. A conclusão é sua.
-        </div>
+        {logos.map((l) => {
+          const p = aparece(frame, l.atraso, 15);
+          return (
+            <div
+              key={l.src}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                opacity: p,
+                transform: `translateY(${(1 - p) * 20}px)`,
+              }}
+            >
+              <Img src={staticFile(l.src)} style={{ width: l.largura }} />
+              {l.sub ? (
+                <div
+                  style={{
+                    fontSize: 30,
+                    fontWeight: 700,
+                    color: P.amarelo,
+                    marginTop: 14,
+                  }}
+                >
+                  {l.sub}
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
       </div>
-    </Cartao>
+    </div>
   );
 };

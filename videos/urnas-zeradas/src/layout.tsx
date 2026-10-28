@@ -7,7 +7,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { LEGENDAS } from "./legendas";
+import { CTA, LEGENDAS } from "./legendas";
 import { FPS, LARGURA_UTIL, SEGURA, X0 } from "./theme";
 
 // Paleta do "dossiê": fundo escuro, cartões cor de papel, cores do avatar do OSM
@@ -91,7 +91,7 @@ export const Topo: React.FC<{
           color: P.amarelo,
         }}
       >
-        ELEIÇÕES 2026
+        OSM EXPLICA
       </div>
     </div>
     <div
@@ -246,6 +246,8 @@ export const Cartao: React.FC<{
 export const Legenda: React.FC = () => {
   const frame = useCurrentFrame();
   const t = frame / FPS;
+  // no encerramento (CTA) a tela já diz tudo; a legenda some para não repetir
+  if (t >= CTA.inicio - 0.25) return null;
   const atual = [...LEGENDAS].reverse().find((l) => t >= l.inicio);
   if (!atual) return null;
   const o = aparece(frame, Math.round(atual.inicio * FPS), 6);

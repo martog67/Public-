@@ -4,6 +4,7 @@ import { AbsoluteFill, Sequence, staticFile, useCurrentFrame } from "remotion";
 import {
   Abertura,
   Bolsa,
+  Cta,
   Final,
   Guaranta,
   Levantamento,
@@ -20,21 +21,25 @@ import { IdCena } from "./roteiro";
 import { CENAS, FONT } from "./theme";
 
 // Capítulos do "dossiê": mapa e ranking dividem o capítulo 3
-const CAPITULOS: Record<IdCena, { n: number; titulo: string; cena: React.FC }> =
-  {
-    abertura: { n: 1, titulo: "O número", cena: Abertura },
-    levantamento: { n: 2, titulo: "De onde vem", cena: Levantamento },
-    mapaEstados: { n: 3, titulo: "Onde estão", cena: MapaEstados },
-    ranking: { n: 3, titulo: "Onde estão", cena: RankingEstados },
-    tabatinga: { n: 4, titulo: "A urna recordista", cena: Tabatinga },
-    locais: { n: 5, titulo: "Onde se vota", cena: Locais },
-    perfil: { n: 6, titulo: "Quem vota", cena: Perfil },
-    bolsa: { n: 7, titulo: "Bolsa Família", cena: Bolsa },
-    guaranta: { n: 8, titulo: "Cidade × aldeia", cena: Guaranta },
-    pl: { n: 9, titulo: "E o PL?", cena: PL },
-    lulaZero: { n: 10, titulo: "O outro lado", cena: LulaZero },
-    final: { n: 11, titulo: "A proporção", cena: Final },
-  };
+const CAPITULOS: Record<
+  IdCena,
+  { n: number; titulo: string; cena: React.FC; semTitulo?: boolean }
+> = {
+  abertura: { n: 1, titulo: "O número", cena: Abertura },
+  levantamento: { n: 2, titulo: "De onde vem", cena: Levantamento },
+  mapaEstados: { n: 3, titulo: "Onde estão", cena: MapaEstados },
+  ranking: { n: 3, titulo: "Onde estão", cena: RankingEstados },
+  tabatinga: { n: 4, titulo: "A urna recordista", cena: Tabatinga },
+  locais: { n: 5, titulo: "Onde se vota", cena: Locais },
+  perfil: { n: 6, titulo: "Quem vota", cena: Perfil },
+  bolsa: { n: 7, titulo: "Bolsa Família", cena: Bolsa },
+  guaranta: { n: 8, titulo: "Cidade × aldeia", cena: Guaranta },
+  pl: { n: 9, titulo: "E o PL?", cena: PL },
+  lulaZero: { n: 10, titulo: "O outro lado", cena: LulaZero },
+  final: { n: 11, titulo: "A proporção", cena: Final },
+  // encerramento: sem título de capítulo
+  cta: { n: 11, titulo: "", cena: Cta, semTitulo: true },
+};
 const TOTAL_CAPITULOS = 11;
 
 const Fundo: React.FC = () => (
@@ -77,7 +82,9 @@ export const UrnasZeradas: React.FC = () => (
           from={c.inicio}
           durationInFrames={c.duracao}
         >
-          <Capitulo numero={cap.n} titulo={cap.titulo} animar={!continua} />
+          {cap.semTitulo ? null : (
+            <Capitulo numero={cap.n} titulo={cap.titulo} animar={!continua} />
+          )}
           <Cena />
         </Sequence>
       );
