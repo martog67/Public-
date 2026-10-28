@@ -7,7 +7,13 @@ Vídeo vertical 1080×1920, 30 fps, cerca de 2 min. Segue o roteiro e o conteúd
 - **Trilha:** composição original por síntese (`scripts/gerar-trilha.py`, sem licença de terceiros), em ré menor e 84 BPM. Tem tique-taque na abertura, pulso nos dados, respiro em Guarantã, final em suspenso e sinos nos números-chave. Os cortes saem das legendas. Para regerar, rode `python3 scripts/gerar-trilha.py src/legendas.ts trilha.wav` e depois `ffmpeg -i trilha.wav -af loudnorm=I=-16:TP=-1.5 -b:a 192k public/audio/trilha.mp3`.
 
 ## Diferenças em relação à referência
-- **Layout próprio:** cabeçalho com o logo do OSM; azul, verde e amarelo do avatar do OSM; e outros elementos visuais: grade com as 106 urnas, boletim de urna em papel, quadradinhos para os locais de votação, grade de 100 pontos para o Bolsa Família e ranking em duas colunas.
+- **Layout próprio, no formato "dossiê de apuração":** sem a manchete fixa da referência.
+  - **Topo:** logo do OSM, a etiqueta "ELEIÇÕES 2026" e uma barra de progresso.
+  - **Capítulos numerados:** 01 O número, 02 De onde vem, 03 Onde estão, 04 A urna recordista, 05 Onde se vota, 06 Quem vota, 07 Bolsa Família, 08 Cidade × aldeia, 09 E o PL?, 10 O outro lado, 11 A proporção.
+  - **Dados em cartões claros, tipo papel:** cada cartão tem a fonte no rodapé.
+  - **Legenda:** em faixa própria, com fio amarelo.
+  - **Gráficos:** grade com as 106 urnas, recorte de jornal com carimbo, mapa do Brasil inteiro (nunca cortado) com lupa para Tabatinga e Guarantã, ranking, boletim de urna, quadradinhos, barras, grade de 100 pontos, rosquinhas, tabela 1º × 2º turno e barra de proporção.
+  - **Cores:** azul, verde e amarelo do avatar do OSM. Lula em azul e Flávio em âmbar, sem cor partidária.
 - **Área segura do Instagram:** todo o conteúdo fica entre x 60–930 e y 250–1500 (regra do `CLAUDE.md`).
 - **"Urna por urna, o número confere":** a referência diz "O Jornal Razão abriu os boletins do TSE, urna por urna, e o número confere". Essa conferência foi feita por eles, não pelo OSM. O texto foi trocado por "Conferidos nos boletins do TSE, urna por urna, os números batem". **Só publique essa frase se o OSM ou uma fonte citada tiver de fato conferido os boletins.** Se não, troque por algo como "segundo o levantamento".
 - **Fechamento:** "O Sul-Mato-Grossense mostra os números, e quem tira a conclusão é você."
