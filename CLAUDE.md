@@ -8,7 +8,10 @@
 
 ## Série OSM Explica
 - Vídeos explicativos (dados, apuração) fazem parte da série **OSM Explica**: a etiqueta "OSM EXPLICA" vai no topo.
-- Todo vídeo da série termina com um CTA: "Siga nossos perfis", com os logos do OSM (@osulmatogrossense) e do O Campo-Grandense.
+- Todo vídeo da série termina com a **assinatura OSM Explica** e um CTA.
+  - **Assinatura:** fundo preto texturizado (#0F0F11), logo do OSM, fita amarela rasgada "EXPLICA" (#F2DA4A, letra condensada Anton) e uma estrela amarela. A referência está em `marca/osm/referencia-osm-explica.jpg`.
+  - **CTA:** "Siga nossos perfis", com o OSM (@osulmatogrossense) e o O Campo-Grandense (@ocampograndense).
+- Nada de títulos de capítulo ("01 O número"): os dados vão direto nos cartões.
 - A narração do CTA é gravada separada e entra depois da narração principal.
 - Não repita na tela o texto que já está na legenda: legenda e grafismo devem se completar, não se duplicar.
 - Fonte dos vídeos: Bricolage Grotesque (SIL OFL). É uma escolha de design, não uma fonte oficial da marca.

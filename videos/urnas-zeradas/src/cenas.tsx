@@ -1,5 +1,13 @@
 import React from "react";
-import { Img, Sequence, staticFile, useCurrentFrame } from "remotion";
+import {
+  AbsoluteFill,
+  Img,
+  Sequence,
+  spring,
+  staticFile,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import {
   Barras,
   Boletim,
@@ -20,8 +28,8 @@ import {
   Rotulo,
   lonLat,
 } from "./cartoes";
-import { Cartao, FLAVIO, G, INTERNO, LULA, P, aparece } from "./layout";
-import { LARGURA_UTIL, X0, local } from "./theme";
+import { Cartao, FLAVIO, INTERNO, LULA, P, aparece } from "./layout";
+import { FONT_EXPLICA, LARGURA_UTIL, X0, local } from "./theme";
 
 // Urnas com zero voto para Flávio, por estado (2º turno)
 const URNAS: readonly [string, string, number][] = [
@@ -582,101 +590,200 @@ export const Final: React.FC = () => (
   </Cartao>
 );
 
-// Encerramento da série OSM Explica: chamada para seguir os perfis
+// Encerramento da série OSM Explica: assinatura (logo + fita "EXPLICA" + estrela)
+// no estilo das vinhetas do OSM, depois a chamada para seguir os perfis.
+const AMARELO_EXPLICA = "#F2DA4A";
+const PRETO_EXPLICA = "#0F0F11";
+
+const Estrela: React.FC<{
+  x: number;
+  y: number;
+  tamanho: number;
+  giro: number;
+  escala: number;
+}> = ({ x, y, tamanho, giro, escala }) => {
+  const pontas = 14;
+  const pts = Array.from({ length: pontas * 2 }, (_, i) => {
+    const r = i % 2 === 0 ? 50 : 26;
+    const a = (Math.PI * i) / pontas;
+    return `${50 + r * Math.sin(a)},${50 - r * Math.cos(a)}`;
+  }).join(" ");
+  return (
+    <svg
+      width={tamanho}
+      height={tamanho}
+      viewBox="0 0 100 100"
+      style={{
+        position: "absolute",
+        left: x - tamanho / 2,
+        top: y - tamanho / 2,
+        transform: `rotate(${giro}deg) scale(${escala})`,
+      }}
+    >
+      <polygon points={pts} fill={AMARELO_EXPLICA} />
+    </svg>
+  );
+};
+
 export const Cta: React.FC = () => {
   const frame = useCurrentFrame();
-  const siga = aparece(frame, 5, 15);
-  const logos = [
+  const { fps } = useVideoConfig();
+  const logo = spring({ frame: frame - 4, fps, config: { damping: 200 } });
+  const fita = spring({ frame: frame - 14, fps, config: { damping: 11 } });
+  const estrela = spring({ frame: frame - 22, fps, config: { damping: 9 } });
+  const siga = aparece(frame, local("cta-siga", "cta"), 18);
+  // a assinatura sobe para dar lugar à chamada
+  const sobe = siga * 250;
+  const perfis = [
     {
-      src: "marca/osm-nome-completo-recorte.png",
-      largura: 680,
-      sub: "@osulmatogrossense",
-      atraso: local("cta-siga", "cta") + 10,
+      src: "marca/osm-sigla-branco.png",
+      altura: 64,
+      arroba: "@osulmatogrossense",
+      atraso: local("cta-siga", "cta") + 8,
     },
     {
       src: "marca/campo-grandense-recorte.png",
-      largura: 540,
-      sub: "",
-      atraso: local("cta-siga", "cta") + 30,
+      altura: 84,
+      arroba: "@ocampograndense",
+      atraso: local("cta-siga", "cta") + 22,
     },
   ];
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: G.capitulo,
-        left: X0,
-        width: LARGURA_UTIL,
-        // a legenda some no CTA, então a cena ocupa até o fim da área segura
-        height: G.legenda.top + G.legenda.altura - G.capitulo,
-        justifyContent: "center",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
+    <AbsoluteFill style={{ background: PRETO_EXPLICA }}>
+      {/* textura de papel/ruído, como nas vinhetas do OSM */}
+      <svg
+        width={1080}
+        height={1920}
+        style={{ position: "absolute", opacity: 0.09 }}
+      >
+        <filter id="ruido">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.85"
+            numOctaves={2}
+            seed={frame % 3}
+          />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width={1080} height={1920} filter="url(#ruido)" />
+      </svg>
       <div
         style={{
-          fontSize: 76,
-          fontWeight: 800,
-          lineHeight: 1.05,
-          textAlign: "center",
-          opacity: siga,
-          transform: `translateY(${(1 - siga) * 20}px)`,
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: 1080,
+          height: 1920,
+          transform: `translateY(${-sobe}px)`,
         }}
       >
-        Siga nossos perfis
+        <Estrela
+          x={850}
+          y={690}
+          tamanho={120}
+          giro={frame * 0.6}
+          escala={estrela}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: 760,
+            left: X0,
+            width: LARGURA_UTIL,
+            display: "flex",
+            justifyContent: "center",
+            opacity: logo,
+            transform: `translateY(${(1 - logo) * 20}px)`,
+          }}
+        >
+          <Img
+            src={staticFile("marca/osm-nome-completo-recorte.png")}
+            style={{ width: 620 }}
+          />
+        </div>
+        <div
+          style={{
+            position: "absolute",
+            top: 930,
+            left: X0,
+            width: LARGURA_UTIL,
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <div
+            style={{
+              background: AMARELO_EXPLICA,
+              color: PRETO_EXPLICA,
+              fontFamily: FONT_EXPLICA,
+              fontSize: 168,
+              lineHeight: 1.05,
+              letterSpacing: 3,
+              padding: "6px 46px 0",
+              // bordas rasgadas da fita
+              clipPath:
+                "polygon(0% 6%, 7% 0%, 16% 5%, 28% 1%, 41% 4%, 55% 0%, 68% 5%, 82% 1%, 93% 4%, 100% 0%, 98% 30%, 100% 62%, 97% 100%, 85% 95%, 71% 100%, 58% 96%, 44% 100%, 30% 95%, 17% 100%, 6% 96%, 0% 100%, 2% 66%, 0% 34%)",
+              opacity: Math.min(1, fita * 3),
+              transform: `rotate(${-1.5 + (1 - fita) * 6}deg) scale(${1.3 - 0.3 * fita})`,
+            }}
+          >
+            EXPLICA
+          </div>
+        </div>
       </div>
       <div
         style={{
-          fontSize: 34,
-          fontWeight: 600,
-          color: P.textoSuave,
-          marginTop: 14,
-          opacity: siga,
-        }}
-      >
-        para mais conteúdos como este
-      </div>
-      <div
-        style={{
+          position: "absolute",
+          top: 940,
+          left: X0,
+          width: LARGURA_UTIL,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: 70,
-          marginTop: 90,
+          opacity: siga,
+          transform: `translateY(${(1 - siga) * 40}px)`,
         }}
       >
-        {logos.map((l) => {
-          const p = aparece(frame, l.atraso, 15);
-          return (
-            <div
-              key={l.src}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                opacity: p,
-                transform: `translateY(${(1 - p) * 20}px)`,
-              }}
-            >
-              <Img src={staticFile(l.src)} style={{ width: l.largura }} />
-              {l.sub ? (
+        <div style={{ fontSize: 66, fontWeight: 800 }}>Siga nossos perfis</div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 34,
+            marginTop: 44,
+            width: 700,
+          }}
+        >
+          {perfis.map((pf) => {
+            const p = aparece(frame, pf.atraso, 15);
+            return (
+              <div
+                key={pf.arroba}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  borderTop: "2px solid rgba(255,255,255,0.15)",
+                  paddingTop: 24,
+                  opacity: p,
+                  transform: `translateX(${(1 - p) * 30}px)`,
+                }}
+              >
+                <Img src={staticFile(pf.src)} style={{ height: pf.altura }} />
                 <div
                   style={{
-                    fontSize: 30,
-                    fontWeight: 700,
-                    color: P.amarelo,
-                    marginTop: 14,
+                    fontSize: 36,
+                    fontWeight: 800,
+                    color: AMARELO_EXPLICA,
                   }}
                 >
-                  {l.sub}
+                  {pf.arroba}
                 </div>
-              ) : null}
-            </div>
-          );
-        })}
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </AbsoluteFill>
   );
 };

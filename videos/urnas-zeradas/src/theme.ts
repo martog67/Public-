@@ -18,6 +18,13 @@ for (const [weight, arquivo] of [
   });
 }
 
+// Anton (SIL OFL): letra condensada da fita "EXPLICA" da assinatura OSM Explica
+export const FONT_EXPLICA = "Anton";
+loadFont({
+  family: FONT_EXPLICA,
+  url: staticFile("fonts/anton-latin-400-normal.woff2"),
+});
+
 // Azul, verde e amarelo observados no avatar do OSM no Instagram
 // (não há paleta oficial em marca/osm/; confirmar com o jornal).
 export const COR = {

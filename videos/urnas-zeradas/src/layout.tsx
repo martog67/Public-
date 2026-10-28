@@ -34,11 +34,12 @@ export const FLAVIO = P.ambar;
 export const G = {
   topo: SEGURA.y0 + 14,
   progresso: 340,
-  capitulo: 366,
-  cartao: { top: 512, altura: 816 },
+  // sem títulos de capítulo: o cartão começa logo abaixo da barra de progresso
+  cartao: { top: 392, altura: 920 },
   legenda: { top: 1348, altura: 140 },
 };
 export const PAD = 32;
+export const CONTEUDO_ALTURA = 712;
 export const INTERNO = LARGURA_UTIL - 2 * PAD; // largura útil dentro do cartão
 
 export const useMola = (atraso = 0, damping = 200) => {
@@ -133,56 +134,6 @@ export const Topo: React.FC<{
   </>
 );
 
-// ---------------------------------------------------------------- Capítulo
-
-export const Capitulo: React.FC<{
-  numero: number;
-  titulo: string;
-  animar: boolean;
-}> = ({ numero, titulo, animar }) => {
-  const s = useMola(0);
-  const p = animar ? s : 1;
-  return (
-    <div
-      style={{
-        position: "absolute",
-        top: G.capitulo,
-        left: X0,
-        width: LARGURA_UTIL,
-        height: 120,
-        display: "flex",
-        alignItems: "center",
-        gap: 24,
-      }}
-    >
-      <div
-        style={{
-          fontSize: 96,
-          fontWeight: 900,
-          color: P.amarelo,
-          letterSpacing: -3,
-          width: 130,
-          opacity: p,
-          transform: `translateY(${(1 - p) * 30}px)`,
-        }}
-      >
-        {String(numero).padStart(2, "0")}
-      </div>
-      <div
-        style={{
-          fontSize: 50,
-          fontWeight: 800,
-          lineHeight: 1.05,
-          opacity: p,
-          transform: `translateX(${(1 - p) * 30}px)`,
-        }}
-      >
-        {titulo}
-      </div>
-    </div>
-  );
-};
-
 // ---------------------------------------------------------------- Cartão
 
 export const Cartao: React.FC<{
@@ -212,9 +163,10 @@ export const Cartao: React.FC<{
         style={{
           position: "absolute",
           left: PAD,
-          top: PAD,
+          // conteúdo das cenas é desenhado para 712 px de altura, centralizado no cartão
+          top: PAD + (G.cartao.altura - 2 * PAD - 40 - CONTEUDO_ALTURA) / 2,
           width: INTERNO,
-          height: G.cartao.altura - 2 * PAD - 40,
+          height: CONTEUDO_ALTURA,
         }}
       >
         {children}
