@@ -2,8 +2,10 @@
 
 Vídeo vertical 1080×1920, 30 fps, cerca de 2 min. Segue o roteiro e o conteúdo de um vídeo de referência de outro veículo, com layout próprio e a identidade do OSM.
 
-- **Vídeo pronto:** [`entrega/urnas-zeradas.mp4`](entrega/urnas-zeradas.mp4), com 124 s.
+- **Vídeo pronto:** [`entrega/urnas-zeradas.mp4`](entrega/urnas-zeradas.mp4), com 129 s.
 - **Narração:** ElevenLabs, voz "Davi Andrei" (eleven_v4), em `public/audio/narracao.mp3`. Os tempos de cada frase em `src/legendas.ts` foram medidos nas pausas da fala. As cenas e animações seguem as frases marcadas (`marca`), então, com um áudio novo, basta ajustar esses tempos.
+- **CTA da série OSM Explica:** "Este foi o OSM Explica. Siga O Sul-Mato-Grossense e O Campo-Grandense para mais conteúdos como este." Está em `public/audio/cta.mp3` e entra 0,4 s depois da narração (tempos em `src/legendas.ts`, objeto `CTA`). Na tela: "Siga nossos perfis", com os logos do OSM (@osulmatogrossense) e do O Campo-Grandense. A legenda some nessa cena para não repetir o texto.
+- **Fonte tipográfica:** Bricolage Grotesque (SIL OFL).
 - **Trilha:** composição original por síntese (`scripts/gerar-trilha.py`, sem licença de terceiros), em ré menor e 84 BPM. Tem tique-taque na abertura, pulso nos dados, respiro em Guarantã, final em suspenso e sinos nos números-chave. Os cortes saem das legendas. Para regerar, rode `python3 scripts/gerar-trilha.py src/legendas.ts trilha.wav` e depois `ffmpeg -i trilha.wav -af loudnorm=I=-16:TP=-1.5 -b:a 192k public/audio/trilha.mp3`.
 
 ## Diferenças em relação à referência
@@ -37,7 +39,7 @@ Vídeo vertical 1080×1920, 30 fps, cerca de 2 min. Segue o roteiro e o conteúd
 
 ## Créditos
 - Contornos dos estados: [@svg-maps/brazil](https://github.com/VictorCazanave/svg-maps) (CC-BY 4.0). A posição de Tabatinga e Guarantã do Norte é aproximada.
-- Fonte tipográfica: Inter (SIL OFL).
+- Fonte tipográfica: Bricolage Grotesque (SIL OFL).
 
 ## Renderizar
 ```bash

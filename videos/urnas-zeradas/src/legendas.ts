@@ -147,18 +147,17 @@ export const LEGENDAS: readonly Frase[] = [
     marca: "conclusao",
   },
   // CTA da série OSM Explica (public/audio/cta.mp3), depois da narração.
-  // Tempos provisórios até o áudio do CTA chegar.
   { inicio: 123.15, texto: "Este foi o OSM Explica", marca: "cta" },
   {
-    inicio: 124.9,
+    inicio: 125.57,
     texto: "Siga O Sul-Mato-Grossense e O Campo-Grandense",
     marca: "cta-siga",
   },
-  { inicio: 127.6, texto: "para mais conteúdos como este" },
+  { inicio: 127.0, texto: "para mais conteúdos como este" },
 ];
 
 // Fim da narração principal (s)
 export const FIM_AUDIO = 122.75;
 
 // Áudio do CTA: começa logo depois da narração
-export const CTA = { inicio: 123.15, duracao: 6.5 };
+export const CTA = { inicio: 123.15, duracao: 5.25 };

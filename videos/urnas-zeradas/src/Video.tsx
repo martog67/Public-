@@ -18,7 +18,8 @@ import {
 } from "./cenas";
 import { Capitulo, Legenda, P, Topo } from "./layout";
 import { IdCena } from "./roteiro";
-import { CENAS, FONT } from "./theme";
+import { CTA } from "./legendas";
+import { CENAS, FONT, FPS } from "./theme";
 
 // Capítulos do "dossiê": mapa e ranking dividem o capítulo 3
 const CAPITULOS: Record<
@@ -91,6 +92,9 @@ export const UrnasZeradas: React.FC = () => (
     })}
     <Legenda />
     <Audio src={staticFile("audio/narracao.mp3")} />
+    <Sequence from={Math.round(CTA.inicio * FPS)} layout="none">
+      <Audio src={staticFile("audio/cta.mp3")} />
+    </Sequence>
     {/* Trilha original (scripts/gerar-trilha.py), ~14 dB abaixo da voz */}
     <Audio src={staticFile("audio/trilha.mp3")} volume={0.09} />
   </AbsoluteFill>

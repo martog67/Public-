@@ -17,8 +17,8 @@ BAR = 4 * BEAT
 
 src = open(sys.argv[1], encoding="utf-8").read()
 MARCAS = {m: float(t) for t, m in re.findall(r'inicio: ([\d.]+),[^}]*?marca: "([^"]+)"', src)}
-FIM = float(re.search(r"FIM_AUDIO = ([\d.]+)", src).group(1))
-DUR = FIM + 1.5
+cta = re.search(r"CTA = \{ inicio: ([\d.]+), duracao: ([\d.]+) \}", src)
+DUR = float(cta.group(1)) + float(cta.group(2)) + 1  # igual a src/roteiro.ts
 corte = lambda m: max(0.0, MARCAS[m] - 0.25)  # igual a src/roteiro.ts
 
 N = int(DUR * SR) + SR
@@ -123,15 +123,16 @@ def secao(t0, t1, acordes, bateria, pulso, tiquetaque=False):
         i += 1
 
 
-c = {m: corte(m) for m in ["abertura", "folha", "am", "perfil", "guaranta", "pl", "final"]}
+c = {m: corte(m) for m in ["abertura", "folha", "am", "perfil", "guaranta", "pl", "final", "cta"]}
 secao(0, c["am"], [DM, BB], None, False, tiquetaque=True)  # abertura e levantamento: tique-taque
 secao(c["am"], c["perfil"], [DM, BB, F, C], "leve", True)  # estados, Tabatinga, locais
 secao(c["perfil"], c["guaranta"], [GM, DM, BB, A], "cheia", True)  # perfil e Bolsa Família
 secao(c["guaranta"], c["pl"], [DM, BB], None, False)  # Guarantã: respiro
 secao(c["pl"], c["final"], [GM, DM, A, DM], "leve", True)  # PL, Roraima, Lula zero
-secao(c["final"], DUR, [DM9], None, False)  # final em suspenso
+secao(c["final"], c["cta"], [DM9], None, False)  # final em suspenso
+secao(c["cta"], DUR, [BB, F], None, True)  # CTA: resolve em fá maior
 
-CORTES = [corte(m) for m in ["folha", "am", "ranking", "tabatinga", "locais", "perfil", "bolsa", "guaranta", "pl", "lula0", "final"]]
+CORTES = [corte(m) for m in ["folha", "am", "ranking", "tabatinga", "locais", "perfil", "bolsa", "guaranta", "pl", "lula0", "final", "cta"]]
 for t in CORTES:
     add(whoosh(), t - 0.8, g=0.15)
     add(impacto(), t, g=0.4)
