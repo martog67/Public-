@@ -4,7 +4,6 @@
 - Todo material produzido para o jornal (vídeos, cards, thumbnails, posts) deve levar o logo do OSM. Os logos ficam em `marca/osm/logos/`; veja `marca/osm/README.md` para qual versão usar.
 - Os logos são brancos com fundo transparente: use sobre fundo escuro.
 - Não invente cores, fontes ou slogans da marca que não estejam em `marca/osm/`.
-
 - O jornal também publica o perfil **O Campo-Grandense**. O logo dele fica em `marca/campo-grandense/logos/`.
 
 ## Série OSM Explica
