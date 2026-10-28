@@ -592,10 +592,10 @@ export const Final: React.FC = () => (
 
 // Encerramento da série OSM Explica: assinatura (logo + fita "EXPLICA" + estrela)
 // no estilo das vinhetas do OSM, depois a chamada para seguir os perfis.
-const AMARELO_EXPLICA = "#F2DA4A";
-const PRETO_EXPLICA = "#0F0F11";
+export const AMARELO_EXPLICA = "#F2DA4A";
+export const PRETO_EXPLICA = "#0F0F11";
 
-const Estrela: React.FC<{
+export const Estrela: React.FC<{
   x: number;
   y: number;
   tamanho: number;
