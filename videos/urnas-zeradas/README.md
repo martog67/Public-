@@ -2,8 +2,9 @@
 
 Vídeo vertical 1080×1920, 30 fps, cerca de 2 min. Segue o roteiro e o conteúdo de um vídeo de referência de outro veículo, com layout próprio e a identidade do OSM.
 
-- **Prévia sem áudio:** [`entrega/previa-sem-audio.mp4`](entrega/previa-sem-audio.mp4). Os tempos são provisórios, tirados do vídeo de referência.
-- **Para sincronizar com a narração final:** ajuste os tempos em `src/legendas.ts`. As cenas e animações seguem as frases marcadas (`marca`), sem precisar mexer no resto.
+- **Vídeo pronto:** [`entrega/urnas-zeradas.mp4`](entrega/urnas-zeradas.mp4), com 124 s.
+- **Narração:** ElevenLabs, voz "Davi Andrei" (eleven_v4), em `public/audio/narracao.mp3`. Os tempos de cada frase em `src/legendas.ts` foram medidos nas pausas da fala. As cenas e animações seguem as frases marcadas (`marca`), então, com um áudio novo, basta ajustar esses tempos.
+- **Trilha:** composição original por síntese (`scripts/gerar-trilha.py`, sem licença de terceiros), em ré menor e 84 BPM. Tem tique-taque na abertura, pulso nos dados, respiro em Guarantã, final em suspenso e sinos nos números-chave. Os cortes saem das legendas. Para regerar, rode `python3 scripts/gerar-trilha.py src/legendas.ts trilha.wav` e depois `ffmpeg -i trilha.wav -af loudnorm=I=-16:TP=-1.5 -b:a 192k public/audio/trilha.mp3`.
 
 ## Diferenças em relação à referência
 - **Layout próprio:** cabeçalho com o logo do OSM; azul, verde e amarelo do avatar do OSM; e outros elementos visuais: grade com as 106 urnas, boletim de urna em papel, quadradinhos para os locais de votação, grade de 100 pontos para o Bolsa Família e ranking em duas colunas.

@@ -1,5 +1,6 @@
+import { Audio } from "@remotion/media";
 import React from "react";
-import { AbsoluteFill, Sequence, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Sequence, staticFile, useCurrentFrame } from "remotion";
 import {
   BRASIL,
   Barras3D,
@@ -144,7 +145,7 @@ const MapaEstados: React.FC = () => {
             titulo: "Pará",
             sub: "16 urnas",
             cor: COR.texto,
-            atraso: local("pa", "mapaEstados") + 45,
+            atraso: local("pa", "mapaEstados") + 10,
           },
         ]}
       />
@@ -154,8 +155,12 @@ const MapaEstados: React.FC = () => {
 };
 
 const RankingCena: React.FC = () => {
-  const rr = local("ranking", "ranking");
-  const atrasos: Record<string, number> = { rr, to: rr + 50, mt: rr + 95 };
+  // cada estado acende quando a narração o cita
+  const atrasos: Record<string, number> = {
+    rr: local("ranking", "ranking") + 35,
+    to: local("to", "ranking"),
+    mt: local("mt", "ranking"),
+  };
   return (
     <>
       <Titulo
@@ -217,7 +222,8 @@ const Tabatinga: React.FC = () => {
           {
             rotulo: "13 LULA",
             votos: 354,
-            atraso: local("lula354", "tabatinga"),
+            // "354" é dito no fim da frase
+            atraso: local("lula354", "tabatinga") + 50,
           },
           {
             rotulo: "22 FLÁVIO",
@@ -719,6 +725,8 @@ export const UrnasZeradas: React.FC = () => (
         </Sequence>
       );
     })}
-    {/* Narração e trilha entram quando o áudio do ElevenLabs chegar */}
+    <Audio src={staticFile("audio/narracao.mp3")} />
+    {/* Trilha original (scripts/gerar-trilha.py), ~14 dB abaixo da voz */}
+    <Audio src={staticFile("audio/trilha.mp3")} volume={0.09} />
   </AbsoluteFill>
 );
