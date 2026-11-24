@@ -1,12 +1,12 @@
-# O discurso e a prática (OSM Explica)
+# O discurso e a prática (O Sul-Mato-Grossense)
 
-Vídeo vertical 1080×1920, 30 fps, para o Instagram. Feito em HyperFrames.
+Vídeo vertical 1080×1920, 30 fps, para o Instagram. Feito em HyperFrames. É o primeiro vídeo do formato **Discurso × Prática**, diferente da série OSM Explica (regras no `CLAUDE.md` da raiz).
 
 **A pauta:** Hugo Motta, presidente da Câmara, defende um ajuste fiscal em nome "dos que mais precisam", enquanto a Câmara e o Senado licitam tablets e celulares de alto padrão. O vídeo mostra os dois lados: a fala, os números dos editais e a justificativa oficial de cada Casa.
 
-- **Rascunho:** [`entrega/rascunho-sem-narracao.mp4`](entrega/rascunho-sem-narracao.mp4), com cerca de 86 s. Tem as falas do Motta e o CTA com áudio, mas a narração principal ainda não está gravada: as legendas mostram o texto, e os tempos são estimados.
-- **Texto para o ElevenLabs:** [`narracao-elevenlabs.txt`](narracao-elevenlabs.txt). Use a mesma voz do CTA ("Davi Andrei", eleven_v4) e salve o resultado como `assets/audio/narracao.mp3`.
-- **CTA:** reaproveitado de `videos/urnas-zeradas` (`assets/audio/cta.mp3`). Entra 0,4 s depois da narração, sobre a assinatura OSM Explica.
+- **Rascunho:** [`entrega/rascunho-sem-narracao.mp4`](entrega/rascunho-sem-narracao.mp4), com cerca de 82 s. Tem as falas do Motta, mas a narração principal e o CTA ainda não estão gravados: as legendas mostram o texto, e os tempos são estimados.
+- **Texto para o ElevenLabs:** [`narracao-elevenlabs.txt`](narracao-elevenlabs.txt). Voz sugerida: "Davi Andrei" (eleven_v4). Salve a narração como `assets/audio/narracao.mp3`.
+- **CTA:** "Siga O Sul-Mato-Grossense para mais conteúdos como este." É gravado separado (`assets/audio/cta.mp3`) e entra 0,4 s depois da narração, sobre o encerramento: logo do OSM, "Siga nosso perfil" e @osulmatogrossense. Sem o arquivo, o encerramento fica 3,5 s na tela, em silêncio.
 
 ## Roteiro
 | # | Cena | Áudio | Na tela |
@@ -19,7 +19,7 @@ Vídeo vertical 1080×1920, 30 fps, para o Instagram. Feito em HyperFrames.
 | n6–n8 | Senado | Celulares: 95 iPhones 18 Pro e 330 aparelhos, troca a cada dois anos; estimado em R$ 6 mi, fechado em R$ 4,95 mi | Card da reportagem, grade com 425 aparelhos (95 + 330), barras estimado × pregão |
 | n9 | O outro lado | Justificativas da Câmara e do Senado | Painéis com o que complementa a fala: o valor da Câmara é teto; no Senado, a operadora empresta e mantém os aparelhos |
 | n10 | Fecho | "O ajuste nas contas vale para o país. Vale também para o Congresso?" | O discurso × a prática, com os dois valores |
-| CTA | Assinatura | CTA gravado | Assinatura OSM Explica e "Siga nossos perfis" |
+| CTA | Encerramento | CTA gravado à parte | Logo do OSM, "Siga nosso perfil" e @osulmatogrossense |
 
 ## Dados e fontes
 | Dado | Fonte |
@@ -50,8 +50,8 @@ npx hyperframes render -o renders/discurso-x-pratica.mp4
 **Quando a narração chegar:** coloque o arquivo em `assets/audio/narracao.mp3` e preencha `narracao_inicio` e `narracao_fim` de cada bloco `n*` no roteiro, com os tempos medidos no áudio (Whisper). Depois rode o script de novo: as cenas, as legendas e os cortes passam a seguir a voz real.
 
 ## Visual
-- Fundo preto #0F0F11 e amarelo #F2DA4A, as cores da assinatura OSM Explica. Fonte: Bricolage Grotesque (SIL OFL); a fita "EXPLICA" usa Anton (SIL OFL).
-- Logo do OSM e etiqueta "OSM EXPLICA" no topo durante todo o vídeo.
+- Fundo preto #0F0F11 e amarelo #F2DA4A, as mesmas cores da referência em `marca/osm/`. Fonte: Bricolage Grotesque (SIL OFL).
+- Só o logo do OSM no topo, sem etiqueta de série.
 - Todo o conteúdo fica na área segura do Instagram (x 60–930, y 250–1500). Os frames de cada cena foram conferidos com `marca/instagram-area-segura-1080x1920.png` sobreposto.
 - Os cards das reportagens do OSM (`assets/fonte/card-*.jpg`) aparecem como recorte na virada para "a prática" e na abertura do Senado.
 - **Sem trilha sonora:** não havia uma trilha licenciada disponível. Se quiser, dá para gerar uma trilha original por script, como em `urnas-zeradas`.

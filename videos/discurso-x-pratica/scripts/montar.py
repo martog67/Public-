@@ -56,8 +56,9 @@ for i, b in enumerate(R["blocos"]):
 
 T_CTA = r2(R["blocos"][-1]["t1"] + 0.6)
 CTA = R["cta"]
+TEM_CTA = os.path.exists(os.path.join(AQUI, CTA["arquivo"]))
 T_CTA_AUDIO = r2(T_CTA + CTA["atraso"])
-FIM = r2(T_CTA_AUDIO + CTA["duracao"] + CTA["sobra"])
+FIM = r2(T_CTA_AUDIO + CTA["duracao"] + CTA["sobra"]) if TEM_CTA else r2(T_CTA + 3.5)
 
 ORDEM = ["discurso", "pratica", "tablets", "senado", "outrolado", "fecho"]
 CENA = {}
@@ -78,8 +79,7 @@ def L(cena, abs_t):
 FONTES = "\n".join(
     f"""@font-face {{ font-family: "Bricolage Grotesque"; font-weight: {p}; src: url("assets/fonts/bricolage-grotesque-latin-{a}-normal.woff2") format("woff2"); }}"""
     for p, a in [(500, 500), (600, 600), (700, 700), (800, 800), (900, 800)]
-) + """
-@font-face { font-family: "Anton"; font-weight: 400; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); }"""
+)
 
 BASE_CSS = f"""
 {FONTES}
@@ -353,75 +353,48 @@ def cena_fecho():
     return cena_html(c, corpo, js, css)
 
 
-# ---------------------------------------------------------------- assinatura OSM Explica + CTA
+# ---------------------------------------------------------------- encerramento: logo do OSM + "Siga nosso perfil"
 def cena_assinatura():
     c = "assinatura"
-    siga = r2(CTA["atraso"] + CTA["siga"])
-    pts = []
-    import math
-    for k in range(32):
-        r = 50 if k % 2 == 0 else 34
-        a = math.pi * k / 16
-        pts.append(f"{60 + r * math.cos(a):.1f},{60 + r * math.sin(a):.1f}")
-    estrela = " ".join(pts)
     css = f"""
 #root #a-fundo {{ position: absolute; inset: 0; background: {PRETO}; }}
 #root #a-ruido {{ position: absolute; inset: 0; opacity: 0.09; }}
-#root #a-grupo {{ position: absolute; left: 0; top: 0; width: {W}px; height: {H}px; }}
-#root #a-logo {{ position: absolute; left: {CENTRO_X - 290}px; top: 690px; width: 580px; }}
-#root #a-fita-w {{ position: absolute; left: {X0}px; top: 850px; width: {LARG}px; display: flex; justify-content: center; }}
-#root #a-fita {{ background: {AMARELO}; color: {PRETO}; font-family: "Anton", sans-serif; font-size: 168px; line-height: 1.05; letter-spacing: 3px; padding: 6px 46px 0;
-  clip-path: polygon(0% 6%, 7% 0%, 16% 5%, 28% 1%, 41% 4%, 55% 0%, 68% 5%, 82% 1%, 93% 4%, 100% 0%, 98% 30%, 100% 62%, 97% 100%, 85% 95%, 71% 100%, 58% 96%, 44% 100%, 30% 95%, 17% 100%, 6% 96%, 0% 100%, 2% 66%, 0% 34%); }}
-#root #a-estrela {{ position: absolute; left: 780px; top: 600px; width: 120px; height: 120px; }}
+#root #a-logo {{ position: absolute; left: {CENTRO_X - 300}px; top: 640px; width: 600px; }}
 #root #a-siga {{ position: absolute; left: {X0}px; top: 930px; width: {LARG}px; display: flex; flex-direction: column; align-items: center; }}
 #root #a-siga .t {{ font-weight: 800; font-size: 66px; }}
-#root #a-siga .perfis {{ width: 700px; margin-top: 44px; display: flex; flex-direction: column; gap: 34px; }}
-#root #a-siga .pf {{ display: flex; align-items: center; justify-content: space-between; border-top: 2px solid {LINHA}; padding-top: 24px; }}
-#root #a-siga .pf span {{ font-weight: 800; font-size: 36px; color: {AMARELO}; }}
+#root #a-siga .pf {{ margin-top: 30px; font-weight: 800; font-size: 46px; color: {AMARELO}; }}
+#root #a-linha {{ position: absolute; left: {CENTRO_X - 260}px; top: 900px; width: 520px; height: 2px; background: {LINHA}; transform-origin: 50% 50%; }}
 """
     corpo = f"""    <div id="a-fundo"></div>
     <svg id="a-ruido" width="{W}" height="{H}" data-layout-ignore><filter id="a-f"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3"/><feColorMatrix type="saturate" values="0"/></filter><rect width="{W}" height="{H}" filter="url(#a-f)"/></svg>
-    <div id="a-grupo">
-      <svg id="a-estrela" viewBox="0 0 120 120"><polygon points="{estrela}" fill="{AMARELO}"/></svg>
-      <img id="a-logo" src="assets/marca/osm-nome-completo-recorte.png" alt="O Sul-Mato-Grossense" />
-      <div id="a-fita-w"><div id="a-fita">EXPLICA</div></div>
-    </div>
+    <img id="a-logo" src="assets/marca/osm-nome-completo-recorte.png" alt="O Sul-Mato-Grossense" />
+    <div id="a-linha"></div>
     <div id="a-siga">
-      <div class="t">Siga nossos perfis</div>
-      <div class="perfis">
-        <div id="a-pf1" class="pf"><img src="assets/marca/osm-sigla-branco.png" style="height:56px" alt="OSM" /><span>@osulmatogrossense</span></div>
-        <div id="a-pf2" class="pf"><img src="assets/marca/campo-grandense-recorte.png" style="height:56px" alt="O Campo-Grandense" /><span>@ocampograndense</span></div>
-      </div>
+      <div class="t">Siga nosso perfil</div>
+      <div id="a-pf" class="pf">@osulmatogrossense</div>
     </div>
 """
     js = (
-        entra("#a-logo", 0.1, y=20, dur=0.4)
-        + '    tl.fromTo("#a-fita", { opacity: 0, scale: 1.3, rotation: 4.5 }, { opacity: 1, scale: 1, rotation: -1.5, duration: 0.45, ease: "back.out(2)" }, 0.35);\n'
-        + '    tl.fromTo("#a-estrela", { scale: 0, rotation: 0 }, { scale: 1, rotation: 40, duration: 0.6, ease: "back.out(3)" }, 0.7);\n'
-        + f'    tl.to("#a-estrela", {{ rotation: 120, duration: {r2(FIM - T_CTA)}, ease: "none" }}, 1.3);\n'
-        + f'    tl.to("#a-grupo", {{ y: -250, duration: 0.6, ease: "power3.inOut" }}, {siga});\n'
-        + f'    tl.fromTo("#a-siga", {{ opacity: 0, y: 40 }}, {{ opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }}, {r2(siga + 0.15)});\n'
-        + f'    tl.fromTo("#a-pf1", {{ opacity: 0, x: 30 }}, {{ opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }}, {r2(siga + 0.4)});\n'
-        + f'    tl.fromTo("#a-pf2", {{ opacity: 0, x: 30 }}, {{ opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }}, {r2(siga + 0.85)});\n'
+        f'    tl.fromTo("#a-logo", {{ opacity: 0, y: 24, scale: 0.94 }}, {{ opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out" }}, 0.1);\n'
+        + f'    tl.fromTo("#a-logo", {{ scale: 1 }}, {{ scale: 1.04, duration: {r2(FIM - T_CTA - 0.6)}, ease: "none" }}, 0.6);\n'
+        + '    tl.fromTo("#a-linha", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 0.45);\n'
+        + '    tl.fromTo("#a-siga", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.6);\n'
+        + '    tl.fromTo("#a-pf", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.9);\n'
     )
     return cena_html(c, corpo, js, css)
 
 
-# ---------------------------------------------------------------- moldura (logo + etiqueta)
+# ---------------------------------------------------------------- moldura (logo no topo, sem etiqueta)
 def cena_moldura():
     c = "moldura"
     css = f"""
 #root #m-logo {{ position: absolute; left: {X0}px; top: 272px; height: 58px; }}
-#root #m-tag {{ position: absolute; top: 284px; right: {W - 906}px; font-weight: 800; font-size: 28px; letter-spacing: 0.14em; color: {AMARELO}; }}
-#root #m-linha {{ position: absolute; left: {X0}px; top: 354px; width: {LARG}px; height: 2px; background: {LINHA}; transform-origin: 0 50%; }}
+#root #m-linha {{ position: absolute; left: {X0}px; top: 354px; width: {LARG}px; height: 2px; background: {LINHA}; }}
 """
-    corpo = f"""    <img id="m-logo" src="assets/marca/osm-sigla-branco.png" alt="OSM" />
-    <div id="m-tag">OSM EXPLICA</div>
+    corpo = """    <img id="m-logo" src="assets/marca/osm-sigla-branco.png" alt="OSM" />
     <div id="m-linha"></div>
 """
-    js = (
-        '    tl.set("#m-logo", { opacity: 1 }, 0);\n'
-    )
+    js = '    tl.set("#m-logo", { opacity: 1 }, 0);\n'
     return cena_html(c, corpo, js, css)
 
 
@@ -497,13 +470,14 @@ def raiz():
         for b in R["blocos"]:
             if b["tipo"] == "narracao" and "narracao_inicio" in b:
                 audios += f'      <audio id="voz-{b["id"]}" class="clip" src="{NARRACAO}" data-start="{b["t0"]}" data-duration="{r2(b["t1"] - b["t0"])}" data-media-start="{b["narracao_inicio"]}" data-volume="1" data-track-index="4"></audio>\n'
-    audios += f'      <audio id="voz-cta" class="clip" src="{CTA["arquivo"]}" data-start="{T_CTA_AUDIO}" data-duration="{CTA["duracao"]}" data-volume="1" data-track-index="4"></audio>\n'
+    if TEM_CTA:
+        audios += f'      <audio id="voz-cta" class="clip" src="{CTA["arquivo"]}" data-start="{T_CTA_AUDIO}" data-duration="{CTA["duracao"]}" data-volume="1" data-track-index="4"></audio>\n'
     return f"""<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width={W}, height={H}" />
-    <title>O discurso e a prática — OSM Explica</title>
+    <title>O discurso e a prática — O Sul-Mato-Grossense</title>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
     <style>
       * {{ margin: 0; padding: 0; box-sizing: border-box; }}
@@ -543,7 +517,7 @@ for nome, conteudo in saidas.items():
     with open(os.path.join(AQUI, nome), "w", encoding="utf-8") as f:
         f.write(conteudo)
 
-print(f"narração gravada: {'sim' if TEM_NARRACAO else 'não (tempos estimados)'}")
+print(f"narração gravada: {'sim' if TEM_NARRACAO else 'não (tempos estimados)'} · CTA gravado: {'sim' if TEM_CTA else 'não'}")
 for b in R["blocos"]:
     print(f"  {b['id']:>4} {b['cena']:<10} {b['t0']:6.2f} – {b['t1']:6.2f}")
 print(f"  CTA {T_CTA:.2f} (áudio {T_CTA_AUDIO:.2f}) · fim {FIM:.2f} s")

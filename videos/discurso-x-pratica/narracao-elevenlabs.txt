@@ -1,6 +1,5 @@
-NARRAÇÃO PRINCIPAL — "O discurso e a prática" (OSM Explica)
-Voz: a mesma do vídeo "urnas-zeradas" (ElevenLabs, "Davi Andrei", modelo eleven_v4),
-para combinar com o CTA, que já está gravado (assets/audio/cta.mp3).
+NARRAÇÃO PRINCIPAL — "O discurso e a prática" (O Sul-Mato-Grossense)
+Voz sugerida: a mesma dos outros vídeos do OSM (ElevenLabs, "Davi Andrei", modelo eleven_v4).
 Gere UM arquivo só, lendo os blocos em ordem. Deixe uma pausa entre eles (cada bloco em
 um parágrafo). Os trechos do Hugo Motta entram entre os blocos na edição; não leia nada dele.
 Salve como: assets/audio/narracao.mp3
@@ -29,5 +28,6 @@ O ajuste nas contas vale para o país. Vale também para o Congresso?
 
 ----- até aqui -----
 
-CTA (já gravado, não precisa gerar de novo):
-Este foi o OSM Explica. Siga O Sul-Mato-Grossense e O Campo-Grandense para mais conteúdos como este.
+CTA: gere SEPARADO, com a mesma voz, e salve como assets/audio/cta.mp3
+
+Siga O Sul-Mato-Grossense para mais conteúdos como este.

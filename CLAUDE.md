@@ -16,6 +16,15 @@
 - Não repita na tela o texto que já está na legenda: legenda e grafismo devem se completar, não se duplicar.
 - Fonte dos vídeos: Bricolage Grotesque (SIL OFL). É uma escolha de design, não uma fonte oficial da marca.
 
+## Formato Discurso × Prática
+- Formato próprio, **separado da série OSM Explica**: confronta o que um político ou uma instituição diz com o que faz, com dados e fontes. Primeiro vídeo: `videos/discurso-x-pratica/`.
+- **Sem etiqueta de série no topo:** só o logo do OSM (sem "OSM EXPLICA").
+- **Estrutura:** o discurso (a fala original, com nome, cargo e crédito da imagem) → a prática (os dados, com fonte e período) → **o outro lado** (a justificativa oficial, obrigatória) → uma pergunta de fecho → encerramento.
+- **Fala original:** quando juntar trechos separados, avise na tela ("Trechos de fala") e não mude o sentido do que foi dito. Não atribua a uma pessoa o que é de outra instituição (ex.: compra do Senado ≠ presidente da Câmara).
+- **Encerramento:** logo do OSM, "Siga nosso perfil" e só @osulmatogrossense. Sem a fita "EXPLICA", sem a estrela e sem O Campo-Grandense.
+- **CTA:** "Siga O Sul-Mato-Grossense para mais conteúdos como este.", gravado separado e entrando depois da narração principal.
+- Valem as regras de conteúdo jornalístico, de legendas (não repetir na tela o texto da legenda) e de área segura do Instagram.
+
 ## Conteúdo jornalístico
 - Todo número em um material precisa de fonte e período visíveis na tela (ex.: "IBGE/PNAD Contínua, 2º tri 2026").
 - Registre as fontes completas (com links) no README do projeto do material.
