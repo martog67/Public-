@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>O discurso e a prática — OSM Explica</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0F0F11; }
+      #root { position: relative; width: 1080px; height: 1920px; background: #0F0F11; }
+      #fundo { position: absolute; inset: 0; background: radial-gradient(120% 70% at 50% 40%, #1b1b20 0%, #0F0F11 70%); }
+    </style>
+  </head>
+  <body>
+    <!-- Gerado por scripts/montar.py a partir de roteiro.json. Edite o roteiro e rode o script de novo. -->
+    <div id="root" data-composition-id="main" data-start="0" data-duration="85.8" data-width="1080" data-height="1920">
+      <div id="fundo"></div>
+      <div id="discurso" data-composition-id="discurso" data-composition-src="compositions/discurso.html" data-start="0.0" data-duration="15.46" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="pratica" data-composition-id="pratica" data-composition-src="compositions/pratica.html" data-start="15.46" data-duration="3.6" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="tablets" data-composition-id="tablets" data-composition-src="compositions/tablets.html" data-start="19.06" data-duration="21.57" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="senado" data-composition-id="senado" data-composition-src="compositions/senado.html" data-start="40.63" data-duration="19.91" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="outrolado" data-composition-id="outrolado" data-composition-src="compositions/outrolado.html" data-start="60.54" data-duration="12.64" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="fecho" data-composition-id="fecho" data-composition-src="compositions/fecho.html" data-start="73.18" data-duration="5.37" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="assinatura" data-composition-id="assinatura" data-composition-src="compositions/assinatura.html" data-start="78.55" data-duration="7.25" data-track-index="1" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="moldura" data-composition-id="moldura" data-composition-src="compositions/moldura.html" data-start="0" data-duration="78.55" data-track-index="2" data-track-kind="graphics" data-width="1080" data-height="1920"></div>
+      <div id="legendas" data-composition-id="legendas" data-composition-src="compositions/legendas.html" data-start="0" data-duration="78.55" data-track-index="3" data-track-kind="captions" data-width="1080" data-height="1920"></div>
+      <audio id="voz-cta" class="clip" src="assets/audio/cta.mp3" data-start="78.95" data-duration="5.25" data-volume="1" data-track-index="4"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

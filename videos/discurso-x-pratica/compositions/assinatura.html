@@ -1,0 +1,65 @@
+<template>
+  <style>
+
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 500; src: url("assets/fonts/bricolage-grotesque-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 600; src: url("assets/fonts/bricolage-grotesque-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 700; src: url("assets/fonts/bricolage-grotesque-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 800; src: url("assets/fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 900; src: url("assets/fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Anton"; font-weight: 400; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; font-family: "Bricolage Grotesque", sans-serif; color: #fff; }
+#root * { box-sizing: border-box; margin: 0; padding: 0; }
+#root .abs { position: absolute; }
+#root .chip { position: absolute; top: 400px; left: 84px; font-weight: 800; font-size: 28px; letter-spacing: 0.14em; padding: 10px 18px 8px; line-height: 1; }
+#root .chip-branco { background: #fff; color: #0F0F11; }
+#root .chip-amarelo { background: #F2DA4A; color: #0F0F11; }
+#root .kicker { position: absolute; top: 406px; left: 84px; width: 822px; font-weight: 800; font-size: 26px; letter-spacing: 0.1em; color: #F2DA4A; }
+#root .fonte { position: absolute; top: 1222px; left: 84px; width: 822px; font-weight: 600; font-size: 24px; line-height: 1.2; color: rgba(255,255,255,0.5); }
+
+
+#root #a-fundo { position: absolute; inset: 0; background: #0F0F11; }
+#root #a-ruido { position: absolute; inset: 0; opacity: 0.09; }
+#root #a-grupo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+#root #a-logo { position: absolute; left: 205px; top: 690px; width: 580px; }
+#root #a-fita-w { position: absolute; left: 84px; top: 850px; width: 822px; display: flex; justify-content: center; }
+#root #a-fita { background: #F2DA4A; color: #0F0F11; font-family: "Anton", sans-serif; font-size: 168px; line-height: 1.05; letter-spacing: 3px; padding: 6px 46px 0;
+  clip-path: polygon(0% 6%, 7% 0%, 16% 5%, 28% 1%, 41% 4%, 55% 0%, 68% 5%, 82% 1%, 93% 4%, 100% 0%, 98% 30%, 100% 62%, 97% 100%, 85% 95%, 71% 100%, 58% 96%, 44% 100%, 30% 95%, 17% 100%, 6% 96%, 0% 100%, 2% 66%, 0% 34%); }
+#root #a-estrela { position: absolute; left: 780px; top: 600px; width: 120px; height: 120px; }
+#root #a-siga { position: absolute; left: 84px; top: 930px; width: 822px; display: flex; flex-direction: column; align-items: center; }
+#root #a-siga .t { font-weight: 800; font-size: 66px; }
+#root #a-siga .perfis { width: 700px; margin-top: 44px; display: flex; flex-direction: column; gap: 34px; }
+#root #a-siga .pf { display: flex; align-items: center; justify-content: space-between; border-top: 2px solid rgba(255,255,255,0.14); padding-top: 24px; }
+#root #a-siga .pf span { font-weight: 800; font-size: 36px; color: #F2DA4A; }
+
+  </style>
+  <div id="root" data-composition-id="assinatura" data-width="1080" data-height="1920">
+    <div id="a-fundo"></div>
+    <svg id="a-ruido" width="1080" height="1920" data-layout-ignore><filter id="a-f"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="3"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1080" height="1920" filter="url(#a-f)"/></svg>
+    <div id="a-grupo">
+      <svg id="a-estrela" viewBox="0 0 120 120"><polygon points="110.0,60.0 93.3,66.6 106.2,79.1 88.3,78.9 95.4,95.4 78.9,88.3 79.1,106.2 66.6,93.3 60.0,110.0 53.4,93.3 40.9,106.2 41.1,88.3 24.6,95.4 31.7,78.9 13.8,79.1 26.7,66.6 10.0,60.0 26.7,53.4 13.8,40.9 31.7,41.1 24.6,24.6 41.1,31.7 40.9,13.8 53.4,26.7 60.0,10.0 66.6,26.7 79.1,13.8 78.9,31.7 95.4,24.6 88.3,41.1 106.2,40.9 93.3,53.4" fill="#F2DA4A"/></svg>
+      <img id="a-logo" src="assets/marca/osm-nome-completo-recorte.png" alt="O Sul-Mato-Grossense" />
+      <div id="a-fita-w"><div id="a-fita">EXPLICA</div></div>
+    </div>
+    <div id="a-siga">
+      <div class="t">Siga nossos perfis</div>
+      <div class="perfis">
+        <div id="a-pf1" class="pf"><img src="assets/marca/osm-sigla-branco.png" style="height:56px" alt="OSM" /><span>@osulmatogrossense</span></div>
+        <div id="a-pf2" class="pf"><img src="assets/marca/campo-grandense-recorte.png" style="height:56px" alt="O Campo-Grandense" /><span>@ocampograndense</span></div>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#a-logo", { opacity: 0, y: 20  }, { opacity: 1, y: 0 , duration: 0.4, ease: "power3.out" }, 0.1);
+    tl.fromTo("#a-fita", { opacity: 0, scale: 1.3, rotation: 4.5 }, { opacity: 1, scale: 1, rotation: -1.5, duration: 0.45, ease: "back.out(2)" }, 0.35);
+    tl.fromTo("#a-estrela", { scale: 0, rotation: 0 }, { scale: 1, rotation: 40, duration: 0.6, ease: "back.out(3)" }, 0.7);
+    tl.to("#a-estrela", { rotation: 120, duration: 7.25, ease: "none" }, 1.3);
+    tl.to("#a-grupo", { y: -250, duration: 0.6, ease: "power3.inOut" }, 2.3);
+    tl.fromTo("#a-siga", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 2.45);
+    tl.fromTo("#a-pf1", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 2.7);
+    tl.fromTo("#a-pf2", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 3.15);
+
+    window.__timelines["assinatura"] = tl;
+  </script>
+</template>

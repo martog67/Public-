@@ -1,0 +1,53 @@
+<template>
+  <style>
+
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 500; src: url("assets/fonts/bricolage-grotesque-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 600; src: url("assets/fonts/bricolage-grotesque-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 700; src: url("assets/fonts/bricolage-grotesque-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 800; src: url("assets/fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 900; src: url("assets/fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Anton"; font-weight: 400; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; font-family: "Bricolage Grotesque", sans-serif; color: #fff; }
+#root * { box-sizing: border-box; margin: 0; padding: 0; }
+#root .abs { position: absolute; }
+#root .chip { position: absolute; top: 400px; left: 84px; font-weight: 800; font-size: 28px; letter-spacing: 0.14em; padding: 10px 18px 8px; line-height: 1; }
+#root .chip-branco { background: #fff; color: #0F0F11; }
+#root .chip-amarelo { background: #F2DA4A; color: #0F0F11; }
+#root .kicker { position: absolute; top: 406px; left: 84px; width: 822px; font-weight: 800; font-size: 26px; letter-spacing: 0.1em; color: #F2DA4A; }
+#root .fonte { position: absolute; top: 1222px; left: 84px; width: 822px; font-weight: 600; font-size: 24px; line-height: 1.2; color: rgba(255,255,255,0.5); }
+
+
+#root #d-moldura { left: 84px; top: 470px; width: 822px; height: 438px; border-radius: 18px; overflow: hidden; background: #000; }
+#root #d-zoom { position: absolute; inset: 0; }
+#root #d-zoom video { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+#root #d-nome { left: 84px; top: 938px; width: 822px; }
+#root #d-nome .n { font-weight: 800; font-size: 52px; line-height: 1.05; }
+#root #d-nome .c { font-weight: 600; font-size: 29px; color: rgba(255,255,255,0.66); margin-top: 8px; }
+#root #d-credito { left: 84px; top: 1096px; width: 822px; font-weight: 600; font-size: 25px; line-height: 1.25; color: rgba(255,255,255,0.5); }
+
+  </style>
+  <div id="root" data-composition-id="discurso" data-width="1080" data-height="1920">
+    <div id="d-chip" class="chip chip-branco">O DISCURSO</div>
+    <div id="d-moldura" class="abs">
+      <div id="d-zoom">
+        <video id="d-v1" class="clip" src="assets/motta-a.mp4" data-start="0.0" data-duration="5.27" data-media-start="0.05" data-has-audio="true" data-volume="1" data-track-index="0" playsinline></video>
+        <video id="d-v2" class="clip" src="assets/motta-a.mp4" data-start="5.27" data-duration="5.82" data-media-start="5.32" data-track-index="0" muted playsinline></video>
+        <video id="d-v3" class="clip" src="assets/motta-a.mp4" data-start="11.09" data-duration="1.52" data-media-start="10.24" data-has-audio="true" data-volume="1" data-track-index="0" playsinline></video>
+        <video id="d-v4" class="clip" src="assets/motta-b.mp4" data-start="12.61" data-duration="2.5" data-media-start="0.46" data-has-audio="true" data-volume="1" data-track-index="0" playsinline></video>
+        <video id="d-v5" class="clip" src="assets/motta-b.mp4" data-start="15.11" data-duration="0.35" data-media-start="2.96" data-track-index="0" muted playsinline></video>
+      </div>
+    </div>
+    <div id="d-nome" class="abs"><div class="n">Hugo Motta</div><div class="c">Presidente da Câmara dos Deputados (Republicanos-PB)</div></div>
+    <div id="d-credito" class="abs">Trechos de fala no plenário da Câmara, nov. 2026.<br>Reprodução: Câmara dos Deputados (@camaradosdeputados)</div>
+
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.set("#d-chip", { opacity: 1 }, 0);
+    tl.fromTo("#d-zoom", { scale: 1 }, { scale: 1.08, duration: 15.46, ease: "none" }, 0);
+    tl.fromTo("#d-nome", { opacity: 0, y: 20  }, { opacity: 1, y: 0 , duration: 0.35, ease: "power3.out" }, 5.62);
+    tl.fromTo("#d-credito", { opacity: 0, y: 12  }, { opacity: 1, y: 0 , duration: 0.35, ease: "power3.out" }, 5.87);
+
+    window.__timelines["discurso"] = tl;
+  </script>
+</template>

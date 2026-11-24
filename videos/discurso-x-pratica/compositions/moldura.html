@@ -1,0 +1,37 @@
+<template>
+  <style>
+
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 500; src: url("assets/fonts/bricolage-grotesque-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 600; src: url("assets/fonts/bricolage-grotesque-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 700; src: url("assets/fonts/bricolage-grotesque-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 800; src: url("assets/fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Bricolage Grotesque"; font-weight: 900; src: url("assets/fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Anton"; font-weight: 400; src: url("assets/fonts/anton-latin-400-normal.woff2") format("woff2"); }
+#root { position: absolute; inset: 0; font-family: "Bricolage Grotesque", sans-serif; color: #fff; }
+#root * { box-sizing: border-box; margin: 0; padding: 0; }
+#root .abs { position: absolute; }
+#root .chip { position: absolute; top: 400px; left: 84px; font-weight: 800; font-size: 28px; letter-spacing: 0.14em; padding: 10px 18px 8px; line-height: 1; }
+#root .chip-branco { background: #fff; color: #0F0F11; }
+#root .chip-amarelo { background: #F2DA4A; color: #0F0F11; }
+#root .kicker { position: absolute; top: 406px; left: 84px; width: 822px; font-weight: 800; font-size: 26px; letter-spacing: 0.1em; color: #F2DA4A; }
+#root .fonte { position: absolute; top: 1222px; left: 84px; width: 822px; font-weight: 600; font-size: 24px; line-height: 1.2; color: rgba(255,255,255,0.5); }
+
+
+#root #m-logo { position: absolute; left: 84px; top: 272px; height: 58px; }
+#root #m-tag { position: absolute; top: 284px; right: 174px; font-weight: 800; font-size: 28px; letter-spacing: 0.14em; color: #F2DA4A; }
+#root #m-linha { position: absolute; left: 84px; top: 354px; width: 822px; height: 2px; background: rgba(255,255,255,0.14); transform-origin: 0 50%; }
+
+  </style>
+  <div id="root" data-composition-id="moldura" data-width="1080" data-height="1920">
+    <img id="m-logo" src="assets/marca/osm-sigla-branco.png" alt="OSM" />
+    <div id="m-tag">OSM EXPLICA</div>
+    <div id="m-linha"></div>
+
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.set("#m-logo", { opacity: 1 }, 0);
+
+    window.__timelines["moldura"] = tl;
+  </script>
+</template>

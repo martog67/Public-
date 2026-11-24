@@ -1,0 +1,33 @@
+NARRAÇÃO PRINCIPAL — "O discurso e a prática" (OSM Explica)
+Voz: a mesma do vídeo "urnas-zeradas" (ElevenLabs, "Davi Andrei", modelo eleven_v4),
+para combinar com o CTA, que já está gravado (assets/audio/cta.mp3).
+Gere UM arquivo só, lendo os blocos em ordem. Deixe uma pausa entre eles (cada bloco em
+um parágrafo). Os trechos do Hugo Motta entram entre os blocos na edição; não leia nada dele.
+Salve como: assets/audio/narracao.mp3
+
+----- copie a partir daqui -----
+
+Hugo Motta, presidente da Câmara, defende um ajuste nas contas públicas.
+
+Mas veja o que a própria Câmara quer comprar.
+
+Um pregão de até cinco vírgula setenta e sete milhões de reais para seiscentos e quatro tablets.
+
+Quinhentos e treze são para os deputados, com teto de quase dez mil reais por aparelho. Os outros noventa e um ficam com a administração.
+
+Entre os modelos de referência, está o iPad Pro, da Apple.
+
+No Senado, a conta é de celulares.
+
+Noventa e cinco iPhones 18 Pro para senadores e diretores, e trezentos e trinta aparelhos para servidores, com troca a cada dois anos.
+
+O pregão foi estimado em seis milhões de reais e fechado em quatro vírgula noventa e cinco milhões.
+
+A Câmara diz que os tablets dão acesso a documentos, sistemas e reuniões, e reduzem o uso de papel. O Senado diz que o empréstimo dos aparelhos sai mais barato do que a compra.
+
+O ajuste nas contas vale para o país. Vale também para o Congresso?
+
+----- até aqui -----
+
+CTA (já gravado, não precisa gerar de novo):
+Este foi o OSM Explica. Siga O Sul-Mato-Grossense e O Campo-Grandense para mais conteúdos como este.
