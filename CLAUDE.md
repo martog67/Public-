@@ -21,7 +21,10 @@
 - Registre as fontes completas (com links) no README do projeto do material.
 
 ## Vídeos
-- Projetos de vídeo em Remotion ficam em `videos/<nome-do-video>/`. Use as skills `remotion-*` em `.claude/skills/`.
+- Vídeos novos são feitos em **HyperFrames** (HTML renderizado em MP4) e ficam em `videos/<nome-do-video>/`. Use as skills `hyperframes`, `hyperframes-cli`, `hyperframes-registry` e `media-use`. Crie com `hyperframes init` e renderize com `hyperframes render`.
+- Projetos antigos em Remotion (`videos/ms-x-bahia/`, `videos/urnas-zeradas/`) continuam em Remotion; para eles, use as skills `remotion-*` em `.claude/skills/`.
+- Ferramentas de apoio: **FFmpeg** (cortar, juntar, converter), **Whisper** (transcrever a narração para gerar legendas; prefira o modelo `small` ou `medium` com `--language pt`) e **yt-dlp** (baixar vídeos de referência para estudo).
+- No ambiente na nuvem, o script de configuração instala yt-dlp, Whisper e HyperFrames; o FFmpeg já vem instalado.
 
 ### Área segura do Instagram (regra obrigatória para vídeos verticais)
 A interface do Instagram (perfil, áudio, menu, legenda do post e botões) cobre partes do vídeo. Em vídeos 1080×1920:
